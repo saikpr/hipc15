@@ -2,13 +2,12 @@ from  bs4 import BeautifulSoup
 import csv
 import sys
 from itertools import izip
-
 def grouped(iterable, n):
     "s -> (s0,s1,s2,...sn-1), (sn,sn+1,sn+2,...s2n-1), (s2n,s2n+1,s2n+2,...s3n-1), ..."
     return izip(*[iter(iterable)]*n)
     
 def scrap_fd(input_fd,output_fd):
-    soup =BeautifulSoup ( input_fd)
+    soup =BeautifulSoup ( input_fd,'html.parser')
     headers=["S_no","Commodity","Weight_per_kg","Price"]
     writer = csv.DictWriter(output_fd, delimiter=',', lineterminator='\n',fieldnames=headers)
     writer.writeheader()
