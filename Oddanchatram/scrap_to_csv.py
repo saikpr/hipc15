@@ -27,7 +27,7 @@ def scrap_fd(input_fd,output_fd):
             # print k
             # print j
             # print l
-            print m
+            # print m
     #         print type(line1.p.b)
     #         print k.get("b")
         except AttributeError:
