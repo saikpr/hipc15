@@ -6,11 +6,11 @@ def grouped(iterable, n):
     "s -> (s0,s1,s2,...sn-1), (sn,sn+1,sn+2,...s2n-1), (s2n,s2n+1,s2n+2,...s3n-1), ..."
     return izip(*[iter(iterable)]*n)
     
-def scrap_fd(input_fd,output_fd):
+def scrap_fd(input_fd,writer,date_sting):
     soup =BeautifulSoup ( input_fd,'html.parser')
-    headers=["S_no","Commodity","Weight_per_kg","Price"]
-    writer = csv.DictWriter(output_fd, delimiter=',', lineterminator='\n',fieldnames=headers)
-    writer.writeheader()
+    #headers=["TimeSeries","S_no","Commodity","Weight_per_kg","Price"]
+    #writer = csv.DictWriter(output_fd, delimiter=',', lineterminator='\n',fieldnames=headers)
+    # writer.writeheader()
     tdata= soup.tbody.find_all("td")
     for line1,line2,line3,line4 in grouped(tdata,4):
         # print "*****line1"
@@ -21,7 +21,7 @@ def scrap_fd(input_fd,output_fd):
             l=line3.contents[0].encode('ascii', 'replace')
             m=line4.contents[0].encode('ascii', 'replace')
             
-            row_dict={"S_no":k,"Commodity":j,"Weight_per_kg":l,"Price":m}
+            row_dict={"TimeSeries":date_sting,"S_no":k,"Commodity":j,"Weight_per_kg":l,"Price":m}
             writer.writerow(row_dict)
             # print k
             # print j
