@@ -1,5 +1,5 @@
 from  bs4 import BeautifulSoup
-import csv
+
 import sys
 from itertools import izip
 def grouped(iterable, n):
