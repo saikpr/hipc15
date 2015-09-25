@@ -21,7 +21,9 @@ if __name__=="__main__":
         try:
             response = urllib2.urlopen(url)
             #output_fd=open("test_csv"+date_string+".csv","wb")
-            scrap_fd(response,writer,this_date.strftime("%Y-%m-%d::%H:%M:%S"))
+            date_st=this_date.strftime("%Y-%m-%d::%H:%M:%S")
+            print date_st
+            scrap_fd(response,writer,date_st)
             response.close()
             output_fd_single_file.flush()
             #output_fd.close()

@@ -12,16 +12,19 @@ def scrap_fd(input_fd,writer,date_sting):
     #writer = csv.DictWriter(output_fd, delimiter=',', lineterminator='\n',fieldnames=headers)
     # writer.writeheader()
     tdata= soup.tbody.find_all("td")
+    is_first=True
     for line1,line2,line3,line4 in grouped(tdata,4):
         # print "*****line1"
+        if is_first==True:
+            is_first=False
+            continue
         try:
     #         print line1
-            k=line1.p.b.contents[0].encode('ascii', 'replace')[1:]
+            k=line1.p.contents[0].encode('ascii', 'replace')
             j=line2.p.contents[0].encode('ascii', 'replace')
-            l=line3.contents[0].encode('ascii', 'replace')
-            m=line4.contents[0].encode('ascii', 'replace')
-            
-            row_dict={"TimeSeries":date_sting,"S_no":k,"Commodity":j,"Weight_per_kg":l,"Price":m}
+            l=line3.p.contents[0].encode('ascii', 'replace')
+            m=line4.p.contents[0].encode('ascii', 'replace')
+            row_dict={"TimeSeries":str(date_sting),"S_no":k,"Commodity":j,"Weight_per_kg":l,"Price":m}
             writer.writerow(row_dict)
             # print k
             # print j
